@@ -82,6 +82,47 @@ class Post(db.Model):
 
     def __repr__(self):
         return f'Post:{self.title}'
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(255))
+    comment = db.Column(db.String(255))
+    date=db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_comment(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls, id):
+        comments = Comment.query.filter_by(post_id = id).all()
+        return comments        
+
+    def __repr__(self):
+        return f'Post:{self.comment}'
+
+class Subscriber(UserMixin, db.Model):
+
+    __tablename__ = "subscribers"
+
+    id= db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String, unique=True)
+
+
+    def save_subscriber(self):
+        db.session.add(self)
+        db.session.commit()
+
+        def __repr__(self):
+
+            return f'Subscribers{self.email}'
+
 
 
                         
