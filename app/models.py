@@ -53,4 +53,35 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'User: {self.username}'
 
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    content = db.Column(db.String(255))
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    comments = db.relationship('Comment', backref='pitch', lazy='dynamic') 
 
+
+    def save_post(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_post(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    @classmethod
+    def get_user_posts(cls,id):
+        posts = Post.query.filter_by(user_id = id).order_by(Post.date_posted.desc()).all()
+        return posts
+
+    @classmethod
+    def get_all_posts(cls):
+        return Post.query.order_by(Post.date_posted.desc()).all()
+
+    def __repr__(self):
+        return f'Post:{self.title}'
+
+
+                        
