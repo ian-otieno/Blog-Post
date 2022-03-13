@@ -4,7 +4,7 @@ from app import db
 
 class CommentsTest(unittest.TestCase):
     def setUp(self):
-        self.user_iano=User(username='iano', password_hash='230000', email = 'iain@gmail.com')
+        self.user_iano=User(username='iain', password_hash='230000', email = 'iain@gmail.com')
 
         self.new_comment=Comment( post_id=1,name='iano', comment='awesome', user=self.user_iano)
 
