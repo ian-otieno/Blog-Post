@@ -122,3 +122,32 @@ def update_profile(name):
 
     return render_template('profdile/update.html',form =form)
 
+@main.route('/user/<name>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(name):
+    user = User.query.filter_by(username = name).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',name=name))
+
+@main.route('/subcscribe', methods = ['GET','POST'])
+def subscription():
+    subscription_form= SubscriptionForm()
+    try:
+        if subscription_form.validate_on_submit():
+            subscriber = Subscriber(email = subscription_form.email.data)
+            db.session.add(subscriber)
+            db.session.commit()
+            flash('Thank you for subscribing to our services, You will recieve daily updates on new blogs')
+            mail_message("Welcome to Blogging","email/welcome_user",subscriber.email,subscriber=subscriber)
+
+            return redirect(url_for('main.subscription'))
+    except:
+        return redirect(url_for('main.index'))
+
+    return render_template ('subscribe.html',  subscription_form = subscription_form)
+
+
