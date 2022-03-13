@@ -1,2 +1,0 @@
-Hello {{user.username}}
-Welcome to my blogging website. You have successfully signed up as a Blogger.
