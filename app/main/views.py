@@ -120,7 +120,7 @@ def update_profile(name):
 
         return redirect(url_for('.profile',name=user.username))
 
-    return render_template('profdile/update.html',form =form)
+    return render_template('profile/update.html',form =form)
 
 @main.route('/user/<name>/update/pic',methods= ['POST'])
 @login_required
