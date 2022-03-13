@@ -72,4 +72,53 @@ def updatePost(id):
         post_form.content.data = post.content
        
     return render_template('edit_post.html',post=post, post_form=post_form)
+@main.route('/delete_post/<int:id>', methods=['GET', 'POST'])
+@login_required
+def deletePost(id):
+    post = Post.query.get_or_404(id)
+    user_id = current_user._get_current_object().id
+    db.session.delete(post)
+    db.session.commit()
+    flash('Blog succesfully deleted')
+    return redirect(url_for('main.index',user_id=user_id)) 
+
+@main.route('/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def deleteComment(id):
+    comment =Comment.query.get_or_404(id)
+    db.session.delete(comment)
+    db.session.commit()
+    
+    return redirect (url_for('main.new_Comment', id=id)) 
+
+@main.route('/user/<name>')
+def profile(name):
+    user = User.query.filter_by(username = name).first()
+    user_id = current_user._get_current_object().id
+    posts = Post.query.filter_by(user_id = user_id).all()
+    if user is None:
+        abort(404)
+
+  
+    return render_template("profile/profile.html", user = user, posts= posts)
+
+
+@main.route('/user/<name>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(name):
+    user = User.query.filter_by(username =name).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',name=user.username))
+
+    return render_template('profdile/update.html',form =form)
 
