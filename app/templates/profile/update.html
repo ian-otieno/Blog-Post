@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="contsiner-fluid" style="background-color:  #14213d; padding: 70px">
+  <div class="container">
+    {{wtf.quick_form(form)}}
+  </div>
+</div>
+
+{% endblock %}
