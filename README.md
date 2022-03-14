@@ -27,7 +27,7 @@ These are the behaviours/features that the application implements for use by a u
 | :---------------- | :---------------: | ------------------: |
 | users loads the application | *On page load* | user sees various posts/blogs posted by bloggers |
 | user clicks on comment button | *On  click* | comment page is loaded and user sees various comments and can add more comments |
-| user clicks on subscribe button | *on lcick* | subscription page is loaded and user enters details for subscription |
+| user clicks on subscribe button | *on click* | subscription page is loaded and user enters details for subscription |
 | writer cllicks on sign up | *On page load* | sign up page is loaded and user can sign up to be a blogger |
 | writer clicks on crete blog  | *on page load* | user is able to create blog on when the page loads |
 | writes clicks on edit post| *edit page is loaded* | user is able to update the blog|
