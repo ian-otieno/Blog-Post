@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-bottom: 0;  " >
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-bottom: 0; background-color: black; " >
     <div class="container-fluid">
         <div class="navbar-header" style="margin-bottom: 0;">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,9 +18,9 @@
                 
                 {% if current_user.is_authenticated %}
                 <li><a class="nav-link" href="/">  {{current_user.username.capitalize()}}</a></li>
-                <li><a href="{{url_for('main.profile',name=current_user.username)}}" style="color: mintcream"> Profile</a>
+                <li><a href="{{url_for('main.profile',name=current_user.username)}}" style="color: white"> Profile</a>
                 </li>
-                <li><a style="text-align: center; color: honeydew;" class="navbar-brand"
+                <li><a style="text-align: center; color: white;" class="navbar-brand"
                   href="/new_post/new"> Create Blog</a></li>
                 <li><a href="{{url_for('auth.logout')}}"></span>Sign out</a></li>
                 {% else %}
