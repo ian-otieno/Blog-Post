@@ -7,6 +7,8 @@ This python-flask blog application was created on the 13/03/2022
 
 ## Description
 This is a python-flask Blog Application where users can see various blogs posted by bloggers and are able to subscribe to recieve notifications on recent posts. The bloggers can sign up for blogging 
+## Live Demo
+Click on the link below to view the site:https://ianoblogging.herokuapp.com/
 
 ## User Stories
 These are the behaviours/features that the application implements for use by a user and writer.
